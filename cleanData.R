@@ -3,7 +3,7 @@
 args <- commandArgs(trailingOnly = TRUE)
 
 if (length(args) != 2) {
-  stop("Usage: script.R <input_dir> <output_file>")
+  stop("Usage: script.R <input_dir> <output_dir>")
 }
 
 inputPath <- args[1]
@@ -12,97 +12,100 @@ outputDir <- args[2]
 library(data.table)
 library(dplyr)
 
-if(!dir.exists(inputPath)){
-    stop("Must be a directory")
+if (!dir.exists(inputPath)) {
+  stop("Must be a directory")
 }
 
-if(!dir.exists(outputDir)){
-    dir.create(outputDir, recursive = TRUE)
+if (!dir.exists(outputDir)) {
+  dir.create(outputDir, recursive = TRUE)
 }
 
-files <- list.files(inputPath, full.names = TRUE)
+files <- list.files(inputPath, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)
 
-dirName  <- basename(dirname(inputPath))
+dirName <- basename(inputPath)
 
 map_A <- c(
-    "time_stamp" = "time_stamp",
-    "assed_id" = "asset_id",
-    "train_test" = "train_tes",
-    "status_type" = "status_type",
-    "avg_temp" = "sensor_0_avg",
-    "avg_wind_speed" = "wind_speed_3_avg",
-    "min_wind_speed" = "wind_speed_3_min",
-    "max_wind_speed" = "wind_speed_3_max",
-    "avg_wind_abs_direction" = "sensor_1_avg",
-    "avg_wind_rel_direction" = "sensor_2_avg",
-    "avg_rotor_speed" = "sensor_52_avg",
-    "min_rotor_speed" = "sensor_52_min",
-    "max_rotor_speed" = "sensor_52_max",
-    "voltage_1" = "sensor_32_avg",
-    "voltage_2" = "sensor_33_avg",
-    "voltage_3" = "sensor_34_avg"
+  "time_stamp" = "time_stamp",
+  "asset_id" = "asset_id",
+  "train_test" = "train_test",
+  "status_type" = "status_type",
+  "avg_temp" = "sensor_0_avg",
+  "avg_wind_speed" = "wind_speed_3_avg",
+  "power_avg" = "power_29_avg",
+  "min_wind_speed" = "wind_speed_3_min",
+  "max_wind_speed" = "wind_speed_3_max",
+  "avg_wind_abs_direction" = "sensor_1_avg",
+  "avg_wind_rel_direction" = "sensor_2_avg",
+  "avg_rotor_speed" = "sensor_52_avg",
+  "min_rotor_speed" = "sensor_52_min",
+  "max_rotor_speed" = "sensor_52_max",
+  "voltage_1" = "sensor_32_avg",
+  "voltage_2" = "sensor_33_avg",
+  "voltage_3" = "sensor_34_avg"
 )
 
 map_B <- c(
-    "time_stamp" = "time_stamp",
-    "assed_id" = "asset_id",
-    "train_test" = "train_tes",
-    "status_type" = "status_type",
-    "avg_temp" = "sensor_8_avg",
-    "min_temp" = "sensor_8_min",
-    "max_temp" = "sensor_8_max", 
-    "avg_wind_speed" = "wind_speed_61_avg",
-    "min_wind_speed" = "wind_speed_61_min",
-    "max_wind_speed" = "wind_speed_61_max",
-    "avg_wind_abs_direction" = "sensor_4_avg",
-    "avg_rotor_speed" = "sensor_25_avg",
-    "min_rotor_speed" = "sensor_25_min",
-    "max_rotor_speed" = "sensor_25_max",
-    "grid_freq" = "sensor_23_avg",
-    "grid_voltage" = "sensor_24_avg"
-) 
+  "time_stamp" = "time_stamp",
+  "asset_id" = "asset_id",
+  "train_test" = "train_test",
+  "status_type" = "status_type",
+  "avg_temp" = "sensor_8_avg",
+  "min_temp" = "sensor_8_min",
+  "max_temp" = "sensor_8_max",
+  "avg_wind_speed" = "wind_speed_61_avg",
+  "power_avg" = "power_29_avg",
+  "min_wind_speed" = "wind_speed_61_min",
+  "max_wind_speed" = "wind_speed_61_max",
+  "avg_wind_abs_direction" = "sensor_4_avg",
+  "avg_rotor_speed" = "sensor_25_avg",
+  "min_rotor_speed" = "sensor_25_min",
+  "max_rotor_speed" = "sensor_25_max",
+  "grid_freq" = "sensor_23_avg",
+  "grid_voltage" = "sensor_24_avg"
+)
 
 map_C <- c(
-    "time_stamp" = "time_stamp",
-    "assed_id" = "asset_id",
-    "train_test" = "train_tes",
-    "status_type" = "status_type",
-    "avg_temp" = "sensor_7_avg",
-    "min_temp" = "sensor_7_min",
-    "max_temp" = "sensor_7_max", 
-    "avg_wind_speed" = "wind_speed_235_avg",
-    "min_wind_speed" = "wind_speed_235_min",
-    "max_wind_speed" = "wind_speed_235_max",
-    "avg_wind_rel_direction" = "sensor_125_avg",
-    "avg_rotor_speed" = "sensor_144_avg",
-    "min_rotor_speed" = "sensor_144_min",
-    "max_rotor_speed" = "sensor_144_max"
+  "time_stamp" = "time_stamp",
+  "asset_id" = "asset_id",
+  "train_test" = "train_test",
+  "status_type" = "status_type",
+  "avg_temp" = "sensor_7_avg",
+  "min_temp" = "sensor_7_min",
+  "max_temp" = "sensor_7_max",
+  "avg_wind_speed" = "wind_speed_235_avg",
+  "power_avg" = "power_29_avg",
+  "min_wind_speed" = "wind_speed_235_min",
+  "max_wind_speed" = "wind_speed_235_max",
+  "avg_wind_rel_direction" = "sensor_125_avg",
+  "avg_rotor_speed" = "sensor_144_avg",
+  "min_rotor_speed" = "sensor_144_min",
+  "max_rotor_speed" = "sensor_144_max"
 )
 
 if (startsWith(dirName, "WindFarmA")) {
-    map  <- map_A
+  map <- map_A
 } else if (startsWith(dirName, "WindFarmB")) {
-    map <- map_B
+  map <- map_B
 } else if (startsWith(dirName, "WindFarmC")) {
-    map <- map_C
+  map <- map_C
 } else {
-    stop("Unknown directory")
+  stop("Unknown directory")
 }
 
 for (path in files) {
-
   data <- fread(path)
 
   cleaned <- data %>%
     rename(any_of(map)) %>%
     select(any_of(names(map)))
 
-  base_name <- tools::file_path_sans_ext(basename(path))
+  if (ncol(cleaned) == 0) {
+    message("Skipping file with no matching columns: ", path)
+    next
+  }
 
-  output_file <- file.path(
-    outputDir,
-    paste0(base_name, "_cleaned.csv")
-  )
+  base_name <- tools::file_path_sans_ext(basename(path))
+  output_file <- file.path(outputDir, paste0(base_name, "_cleaned.csv"))
 
   fwrite(cleaned, output_file)
 }
