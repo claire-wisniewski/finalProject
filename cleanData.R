@@ -53,7 +53,7 @@ map_B <- c(
   "min_temp" = "sensor_8_min",
   "max_temp" = "sensor_8_max",
   "avg_wind_speed" = "wind_speed_61_avg",
-  "power_avg" = "power_29_avg",
+  "power_avg" = "sensor_3_avg",
   "min_wind_speed" = "wind_speed_61_min",
   "max_wind_speed" = "wind_speed_61_max",
   "avg_wind_abs_direction" = "sensor_4_avg",
@@ -73,7 +73,7 @@ map_C <- c(
   "min_temp" = "sensor_7_min",
   "max_temp" = "sensor_7_max",
   "avg_wind_speed" = "wind_speed_235_avg",
-  "power_avg" = "power_29_avg",
+  "power_avg" = "power_6_avg",
   "min_wind_speed" = "wind_speed_235_min",
   "max_wind_speed" = "wind_speed_235_max",
   "avg_wind_rel_direction" = "sensor_125_avg",
@@ -114,7 +114,7 @@ for (path in files) {
     filter(train_test != "prediction") %>%
     rename(any_of(map)) %>%
     mutate(anomaly_indicator = case_when(status_type %in% c(0, 2) ~ 0, status_type %in% c(1, 3, 4, 5) ~ 1)) %>%
-    select(any_of(names(map), "anomaly_indicator"))
+    select(any_of(c(names(map), "anomaly_indicator")))
 
   if (ncol(cleaned) == 0) {
     message("Skipping file with no matching columns: ", path)
