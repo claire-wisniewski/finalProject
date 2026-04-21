@@ -1,0 +1,21 @@
+universe = container
+container_image = file:///staging/jgillett/R_tidyverse_FITSio.sif
+
+executable = run_direction_summary.sh
+arguments = $(input_file)
+
+transfer_input_files = make_direction_summary.R,$(input_file)
+transfer_output_files = $(outfile)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+request_cpus = 1
+request_memory = 512MB
+request_disk = 1GB
+
+log = logs/job_$(Cluster)_$(Process).log
+output = logs/job_$(Cluster)_$(Process).out
+error = logs/job_$(Cluster)_$(Process).err
+
+queue input_file, outfile from job_table.txt

@@ -1,0 +1,77 @@
+000 (6611.004.000) 2026-04-20 11:21:35 Job submitted from host: <128.105.76.6:9618?addrs=128.105.76.6-9618+[2607-f388-2200-100-216-3eff-fe63-f8a5]-9618&alias=learn.chtc.wisc.edu&noUDP&sock=schedd_6739_f8d1>
+...
+040 (6611.004.000) 2026-04-20 11:22:19 Started transferring input files
+	Transferring to host: <128.105.69.205:9618?addrs=128.105.69.205-9618+[2607-f388-2200-100-eaeb-d3ff-fe40-294c]-9618&alias=e2588.chtc.wisc.edu&noUDP&sock=slot1_18_3621996_97d0_124145>
+...
+040 (6611.004.000) 2026-04-20 11:22:19 Finished transferring input files
+...
+040 (6611.004.000) 2026-04-20 11:22:20 Started transferring output files
+...
+040 (6611.004.000) 2026-04-20 11:22:20 Finished transferring output files
+...
+021 (6611.004.000) 2026-04-20 11:22:20 Error from starter on slot1_18@e2588.chtc.wisc.edu:
+	Failed to transfer files: FILETRANSFER:1:non-zero exit (1) from /usr/libexec/condor/curl_plugin. |Error: Couldn't open file /staging/jgillett/R_tidyverse_FITSio.sif (with environment: http_proxy='http://squid-cs-2360.chtc.wisc.edu:3128', https_proxy='') ( URL file = file:///staging/jgillett/R_tidyverse_FITSio.sif )|
+	Code 12 Subcode 256
+...
+004 (6611.004.000) 2026-04-20 11:22:21 Job was evicted. Code 13 Subcode 256
+	(0) CPU times
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	0  -  Run Bytes Received By Job
+	Reason: Transfer input files failure at execution point slot1_18@e2588.chtc.wisc.edu using protocol file. Details: Couldn't open file /staging/jgillett/R_tidyverse_FITSio.sif (with environment: http_proxy='http://squid-cs-2360.chtc.wisc.edu:3128', https_proxy='') ( URL file = file:///staging/jgillett/R_tidyverse_FITSio.sif )|
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :                 1         1 
+	   Disk (KB)            :     5487  1048576   1048576 
+	   GPUs                 :                           0 
+	   IoHeavy              :                           0 
+	   Memory (MB)          :               512       512 
+...
+012 (6611.004.000) 2026-04-20 11:22:21 Job was held.
+	Transfer input files failure at execution point slot1_18@e2588.chtc.wisc.edu using protocol file. Details: Couldn't open file /staging/jgillett/R_tidyverse_FITSio.sif (with environment: http_proxy='http://squid-cs-2360.chtc.wisc.edu:3128', https_proxy='') ( URL file = file:///staging/jgillett/R_tidyverse_FITSio.sif )|
+	Code 13 Subcode 256
+...
+013 (6611.004.000) 2026-04-20 11:34:29 Job was released.
+	via condor_release (by user elissick)
+...
+040 (6611.004.000) 2026-04-20 11:34:43 Started transferring input files
+	Transferring to host: <128.105.69.244:9618?addrs=128.105.69.244-9618+[2607-f388-2200-100-eaeb-d3ff-fe40-205c]-9618&alias=e2627.chtc.wisc.edu&noUDP&sock=slot1_19_3581344_94db_131618>
+...
+040 (6611.004.000) 2026-04-20 11:34:49 Finished transferring input files
+...
+001 (6611.004.000) 2026-04-20 11:34:49 Job executing on host: <128.105.69.244:9618?addrs=128.105.69.244-9618+[2607-f388-2200-100-eaeb-d3ff-fe40-205c]-9618&alias=e2627.chtc.wisc.edu&noUDP&sock=startd_2088964_2141>
+	SlotName: slot1_19@e2627.chtc.wisc.edu
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_1992128/scratch"
+	Cpus = 1
+	Disk = 1048576
+	GPUs = 0
+	IoHeavy = 0
+	Memory = 512
+...
+006 (6611.004.000) 2026-04-20 11:34:52 Image size of job updated: 3664
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+040 (6611.004.000) 2026-04-20 11:34:52 Started transferring output files
+...
+040 (6611.004.000) 2026-04-20 11:34:52 Finished transferring output files
+...
+005 (6611.004.000) 2026-04-20 11:34:52 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:02, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:02, Sys 0 00:00:00  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	2272  -  Run Bytes Sent By Job
+	802550003  -  Run Bytes Received By Job
+	2272  -  Total Bytes Sent By Job
+	802550003  -  Total Bytes Received By Job
+	Partitionable Resources :     Usage  Request Allocated 
+	   Cpus                 :      0.07        1         1 
+	   Disk (KB)            : 783772     1048576   1048576 
+	   GPUs                 :                            0 
+	   IoHeavy              :                            0 
+	   Memory (MB)          :      0         512       512 
+	   TimeExecute (s)      :      3                       
+	   TimeSlotBusy (s)     :      9                       
+...

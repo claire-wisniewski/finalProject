@@ -1,0 +1,80 @@
+000 (6767.002.000) 2026-04-20 23:18:31 Job submitted from host: <128.105.76.6:9618?addrs=128.105.76.6-9618+[2607-f388-2200-100-216-3eff-fe63-f8a5]-9618&alias=learn.chtc.wisc.edu&noUDP&sock=schedd_6739_f8d1>
+...
+040 (6767.002.000) 2026-04-20 23:18:52 Started transferring input files
+	Transferring to host: <128.105.68.154:9618?addrs=128.105.68.154-9618+[fde1-53ba-e9a0-de11-8055-9bb5-58cf-8aeb]-9618&alias=e2013.chtc.wisc.edu&noUDP&sock=slot1_6_11637_11b2_29047>
+...
+040 (6767.002.000) 2026-04-20 23:18:54 Finished transferring input files
+...
+001 (6767.002.000) 2026-04-20 23:18:54 Job executing on host: <128.105.68.154:9618?addrs=128.105.68.154-9618+[fde1-53ba-e9a0-de11-8055-9bb5-58cf-8aeb]-9618&alias=e2013.chtc.wisc.edu&noUDP&sock=startd_11559_174e>
+	SlotName: slot1_6@e2013.chtc.wisc.edu
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_3858258/scratch"
+	Cpus = 1
+	Disk = 1048576
+	GPUs = 0
+	IoHeavy = 0
+	Memory = 1024
+...
+022 (6767.002.000) 2026-04-20 23:18:54 Job disconnected, attempting to reconnect
+    Socket between submit and execute hosts closed unexpectedly
+    Trying to reconnect to slot1_6@e2013.chtc.wisc.edu <128.105.68.154:9618?addrs=128.105.68.154-9618+[fde1-53ba-e9a0-de11-8055-9bb5-58cf-8aeb]-9618&alias=e2013.chtc.wisc.edu&noUDP&sock=startd_11559_174e>
+...
+024 (6767.002.000) 2026-04-20 23:19:02 Job reconnection failed
+    Job not found at execution machine
+    Can not reconnect to slot1_6@e2013.chtc.wisc.edu, rescheduling job
+...
+004 (6767.002.000) 2026-04-20 23:19:02 Job was evicted. Code 1008 Subcode 0
+	(0) CPU times
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+	0  -  Run Bytes Sent By Job
+	812219561  -  Run Bytes Received By Job
+	Reason: Job not found at execution machine
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :        0        1         1 
+	   Disk (KB)            :   793248  1048576   1048576 
+	   GPUs                 :                           0 
+	   IoHeavy              :                           0 
+	   Memory (MB)          :              1024      1024 
+	   TimeSlotBusy (s)     :       11                    
+...
+040 (6767.002.000) 2026-04-20 23:19:36 Started transferring input files
+	Transferring to host: <128.105.68.46:9618?addrs=128.105.68.46-9618+[2607-f388-2200-100-3680-dff-fe2e-8780]-9618&alias=e2476.chtc.wisc.edu&noUDP&sock=slot1_34_2894634_4386_93304>
+...
+040 (6767.002.000) 2026-04-20 23:19:48 Finished transferring input files
+...
+001 (6767.002.000) 2026-04-20 23:19:48 Job executing on host: <128.105.68.46:9618?addrs=128.105.68.46-9618+[2607-f388-2200-100-3680-dff-fe2e-8780]-9618&alias=e2476.chtc.wisc.edu&noUDP&sock=startd_11549_3b5b>
+	SlotName: slot1_34@e2476.chtc.wisc.edu
+	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_2325480/scratch"
+	Cpus = 1
+	Disk = 1048576
+	GPUs = 0
+	IoHeavy = 0
+	Memory = 1024
+...
+006 (6767.002.000) 2026-04-20 23:19:55 Image size of job updated: 150068
+	0  -  MemoryUsage of job (MB)
+	0  -  ResidentSetSize of job (KB)
+...
+040 (6767.002.000) 2026-04-20 23:19:55 Started transferring output files
+...
+040 (6767.002.000) 2026-04-20 23:19:55 Finished transferring output files
+...
+005 (6767.002.000) 2026-04-20 23:19:56 Job terminated.
+	(1) Normal termination (return value 0)
+		Usr 0 00:00:03, Sys 0 00:00:01  -  Run Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
+		Usr 0 00:00:03, Sys 0 00:00:01  -  Total Remote Usage
+		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
+	583  -  Run Bytes Sent By Job
+	812219561  -  Run Bytes Received By Job
+	583  -  Total Bytes Sent By Job
+	1624439122  -  Total Bytes Received By Job
+	Partitionable Resources :    Usage  Request Allocated 
+	   Cpus                 :        0        1         1 
+	   Disk (KB)            :   793213  1048576   1048576 
+	   GPUs                 :                           0 
+	   IoHeavy              :                           0 
+	   Memory (MB)          :        0     1024      1024 
+	   TimeExecute (s)      :        7                    
+	   TimeSlotBusy (s)     :       19                    
+...

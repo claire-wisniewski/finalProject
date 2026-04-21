@@ -1,0 +1,194 @@
+---
+title: "Wind Direction and Speed Graphs"
+author: "Elise Lissick"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(dplyr)
+library(ggplot2)
+# install.packages("svglite", repos = "https://cloud.r-project.org")
+library(svglite)
+
+# read combined summary file
+df <- read_csv("all_direction_summary.csv", show_col_types = FALSE)
+df <- df %>%
+  filter(!is.na(farm), !grepl("^==>", farm))
+
+head(df)
+
+# combine turbine-level summaries into farm-level summaries
+heatmap_df <- df %>%
+  group_by(farm, season, direction_sector) %>%
+  summarise(n = sum(n), .groups = "drop") %>%
+  group_by(farm, season) %>%
+  mutate(prop = n / sum(n)) %>%
+  ungroup()
+
+# order seasons and compass directions
+heatmap_df$season <- factor(
+  heatmap_df$season,
+  levels = c("Spring", "Summer", "Fall", "Winter")
+)
+
+heatmap_df$direction_sector <- factor(
+  heatmap_df$direction_sector,
+  levels = c("N", "NE", "E", "SE", "S", "SW", "W", "NW")
+)
+
+heatmap_df
+
+heatmap_plot <- ggplot(heatmap_df, aes(x = season, y = direction_sector, fill = prop)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = sprintf("%.2f", prop)), size = 3) +
+  facet_wrap(~ farm) +
+  labs(
+    title = "Seasonal Wind Direction Distribution by Wind Farm",
+    x = "Season",
+    y = "Direction Sector",
+    fill = "Proportion"
+  ) +
+  theme_minimal(base_size = 12) +
+  scale_fill_gradientn(
+  colours = c("#E8F4C8",
+              "#C7E6F4",
+              "#F4C7D9")
+)
+
+heatmap_plot
+```
+
+
+
+```{r}
+# remember that for wind farm b, we excluded two line with avg wind speed = about 140 (which is impossible)
+anom <- read_csv("all_anomaly_summary.csv", show_col_types = FALSE)
+
+head(anom)
+```
+
+
+---
+
+# Plot 2: Anomaly rate by direction sector (A and B only)
+
+
+
+```{r fig.width=8, fig.height=5}
+direction_plot <- anom %>%
+  filter(farm != "WindFarmC") %>%
+  group_by(farm, direction_sector) %>%
+  summarise(
+    anomaly_rate = sum(n[anomaly_indicator == 1]) / sum(n),
+    .groups = "drop"
+  )
+
+direction_plot$direction_sector <- factor(
+  direction_plot$direction_sector,
+  levels = c("N","NE","E","SE","S","SW","W","NW")
+)
+
+direction_anomaly_plot <- ggplot(direction_plot,
+       aes(x = direction_sector,
+           y = anomaly_rate,
+           fill = farm)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = c(
+    "WindFarmA" = "#E8F4C8",
+    "WindFarmB" = "#F7D9C4"
+  )) +
+  labs(
+    title = "Anomaly Rate by Wind Direction Sector",
+    x = "Direction Sector",
+    y = "Anomaly Rate"
+  ) +
+  theme_minimal()
+
+direction_anomaly_plot
+```
+
+
+---
+# Plot 3: Anomaly rate by wind speed
+
+
+```{r fig.width=8, fig.height=5}
+
+speed_plot <- anom %>%
+  group_by(farm, wind_speed_bin) %>%
+  summarise(
+    anomaly_rate = sum(n[anomaly_indicator == 1]) / sum(n),
+    .groups = "drop"
+  )
+
+speed_plot$wind_speed_bin <- factor(
+  speed_plot$wind_speed_bin,
+  levels = c("0-2","2-4","4-6","6-8","8-12","12+")
+)
+
+speed_anomaly_plot <- ggplot(speed_plot,
+       aes(x = wind_speed_bin,
+           y = anomaly_rate,
+           color = farm,
+           group = farm)) +
+  geom_line(linewidth = 1.3) +
+  geom_point(size = 5) +
+  scale_color_manual(values = c(
+    "WindFarmA" = "#E8F4C8",
+    "WindFarmB" = "#F7D9C4",
+    "WindFarmC" = "#C7E6F4"
+  )) +
+  labs(
+    title = "Anomaly Rate by Wind Speed",
+    x = "Wind Speed (m/s)",
+    y = "Anomaly Rate"
+  ) +
+  theme_minimal()
+
+speed_anomaly_plot
+
+```
+
+```{r}
+# count of observations by each farm with wind speed in 0-2
+count_plot <- anom %>%
+  filter(wind_speed_bin=="0-2") %>%
+  group_by(farm) %>%
+  summarise(
+    total = sum(n),
+    .groups = "drop"
+  )
+count_plot
+```
+
+
+
+
+```{r}
+
+ggsave("heatmap_plot.svg",
+       plot = heatmap_plot,
+       width = 10,
+       height = 6)
+
+ggsave("direction_anomaly_plot.svg",
+       plot = direction_anomaly_plot,
+       width = 8,
+       height = 5)
+
+ggsave("speed_anomaly_plot.svg",
+       plot = speed_anomaly_plot,
+       width = 8,
+       height = 5)
+
+```
+
+
+
+

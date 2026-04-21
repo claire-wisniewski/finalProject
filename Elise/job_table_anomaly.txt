@@ -1,0 +1,3 @@
+/home/elissick/finalProject/WindFarmA_combined.csv WindFarmA_anomaly_summary.csv
+/home/elissick/finalProject/WindFarmB_combined.csv WindFarmB_anomaly_summary.csv
+/home/elissick/finalProject/WindFarmC_combined.csv WindFarmC_anomaly_summary.csv
