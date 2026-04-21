@@ -28,10 +28,9 @@ if (length(missing) > 0) {
     stop(paste("Missing columns:", paste(missing, collapse=", ")))
 }
 
-df = df[df$train_test != "test", ]
 df$wind_farm = windFarm
-df$avg_wind_speed = as.numeric(df$avg_wind_speed)
-df$avg_rotor_speed = as.numeric(df$avg_rotor_speed)
+df$avg_wind_speed = abs(as.numeric(df$avg_wind_speed))
+df$avg_rotor_speed = abs(as.numeric(df$avg_rotor_speed))
 
 # identify season
 df$time_stamp = as.POSIXct(df$time_stamp, format = "%Y-%m-%dT%H:%M:%SZ", tz = "UTC")
