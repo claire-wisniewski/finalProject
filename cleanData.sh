@@ -1,9 +1,8 @@
 #!/bin/bash
 
-Rscript -e "install.packages('dplyr', repos='https://cloud.r-project.org')"
+Rscript -e "packages <- c('dplyr','data.table'); installed <- rownames(installed.packages()); to_install <- setdiff(packages, installed); if(length(to_install)) install.packages(to_install, repos='https://cloud.r-project.org')"
 
 BASE_DIR="."
-
 OUT_DIR="./cleaned_data"
 
 mkdir -p "$OUT_DIR"
@@ -18,26 +17,16 @@ do
     Rscript cleanData.R "$INPUT_PATH" "$OUTPUT_PATH"
 
     OUTPUT_FILE="$OUT_DIR/${farm}_combined.csv"
-
     first=1
-    for file in "$OUTPUT_PATH"/*.csv; do
 
-	[ -f "$file" ] || continue
+    for file in "$OUTPUT_PATH"/*_cleaned.csv; do
+        [ -f "$file" ] || continue
 
-	if [[ "$(basename "$file")" == "event_info.csv" ]]; then
-	    continue
-	fi
-	
-	if [ $first -eq 1 ]; then
-
-	    cat "$file" > "$OUTPUT_FILE"
-
-	    first=0
-
-	else
-
-	    tail -n +2 "$file" >> "$OUTPUT_FILE"
-
-	fi
-    done 
+        if [ $first -eq 1 ]; then
+            cat "$file" > "$OUTPUT_FILE"
+            first=0
+        else
+            tail -n +2 "$file" >> "$OUTPUT_FILE"
+        fi
+    done
 done

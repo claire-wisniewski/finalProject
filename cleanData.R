@@ -20,7 +20,16 @@ if (!dir.exists(outputDir)) {
   dir.create(outputDir, recursive = TRUE)
 }
 
-files <- list.files(inputPath, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)
+files <- list.files(
+  inputPath,
+  pattern = "\\.csv$",
+  full.names = TRUE,
+  recursive = TRUE
+)
+
+if (length(files) == 0) {
+  stop("No CSV files found in input directory")
+}
 
 dirName <- basename(inputPath)
 
@@ -93,36 +102,75 @@ if (startsWith(dirName, "WindFarmA")) {
 }
 
 for (path in files) {
-  file_name = basename(path)
+  file_name <- basename(path)
 
   if (startsWith(file_name, "comma_")) {
-     file.remove(path)
-
-     next
-  }
-
-  if (file_name == "event_info.csv") {
-     output_file = file.path(outputDir, paste0(dirName, "_", file_name))
-     file.copy(path, output_file, overwrite = TRUE)
-
-     next
-  }
-
-  data <- fread(path)
-
-  cleaned <- data %>%
-    filter(train_test != "prediction") %>%
-    rename(any_of(map)) %>%
-    mutate(anomaly_indicator = case_when(status_type %in% c(0, 2) ~ 0, status_type %in% c(1, 3, 4, 5) ~ 1)) %>%
-    select(any_of(c(names(map), "anomaly_indicator")))
-
-  if (ncol(cleaned) == 0) {
-    message("Skipping file with no matching columns: ", path)
+    message("Skipping file starting with 'comma_': ", path)
     next
   }
 
-  base_name <- tools::file_path_sans_ext(basename(path))
+  if (file_name == "event_info.csv") {
+    output_file <- file.path(outputDir, paste0(dirName, "_", file_name))
+    file.copy(path, output_file, overwrite = TRUE)
+    message("Copied event_info.csv to: ", output_file)
+    next
+  }
+
+  data <- tryCatch(
+    fread(path),
+    error = function(e) {
+      message("Skipping file due to fread error: ", path)
+      return(NULL)
+    }
+  )
+
+  if (is.null(data)) {
+    next
+  }
+
+  required_cols <- unique(c("train_test", unname(map)))
+  missing_cols <- setdiff(required_cols, names(data))
+
+  if (length(missing_cols) > 0) {
+    message(
+      "Skipping file due to missing columns: ", path,
+      "\nMissing: ", paste(missing_cols, collapse = ", ")
+    )
+    next
+  }
+
+  cleaned <- tryCatch({
+    data %>%
+      rename(!!!map) %>%
+      mutate(
+        anomaly_indicator = case_when(
+          status_type %in% c(0, 2) ~ 0L,
+          status_type %in% c(1, 3, 4, 5) ~ 1L,
+          TRUE ~ NA_integer_
+        )
+      ) %>%
+      select(any_of(c(names(map), "anomaly_indicator")))
+  }, error = function(e) {
+    message("Skipping file due to processing error: ", path)
+    return(NULL)
+  })
+
+  if (is.null(cleaned)) {
+    next
+  }
+
+  if (ncol(cleaned) == 0) {
+    message("Skipping file with no matching columns after processing: ", path)
+    next
+  }
+
+  base_name <- tools::file_path_sans_ext(file_name)
   output_file <- file.path(outputDir, paste0(base_name, "_cleaned.csv"))
 
-  fwrite(cleaned, output_file)
+  tryCatch(
+    fwrite(cleaned, output_file),
+    error = function(e) {
+      message("Failed to write output for file: ", path)
+    }
+  )
 }
