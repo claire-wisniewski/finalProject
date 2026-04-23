@@ -1,0 +1,351 @@
+Loaded: WindFarmA_combined.csv
+Train shape: (916923, 13)
+Validation shape: (229231, 13)
+Test shape: (50593, 13)
+Positive rate in test set: 0.4198
+
+Accuracy: 0.8364
+ROC-AUC: 0.9323
+
+Confusion matrix:
+[[29355     0]
+ [ 8277 12961]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.7801    1.0000    0.8764     29355
+           1     1.0000    0.6103    0.7580     21238
+
+    accuracy                         0.8364     50593
+   macro avg     0.8900    0.8051    0.8172     50593
+weighted avg     0.8724    0.8364    0.8267     50593
+
+
+Top 10 most sensitive features:
+               feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+             power_avg     0.041657          1.000000              0.000000 WindFarmA    gaussian
+       avg_rotor_speed     0.030784          0.642996              0.042201 WindFarmA    gaussian
+       max_rotor_speed     0.028580          0.570640              0.050754 WindFarmA    gaussian
+       min_rotor_speed     0.027558          0.537070              0.054722 WindFarmA    gaussian
+avg_wind_abs_direction     0.025782          0.478776              0.061613 WindFarmA    gaussian
+        avg_wind_speed     0.023735          0.411571              0.069558 WindFarmA    gaussian
+        max_wind_speed     0.022742          0.378961              0.073412 WindFarmA    gaussian
+avg_wind_rel_direction     0.017768          0.215634              0.092719 WindFarmA    gaussian
+              avg_temp     0.015253          0.133075              0.102478 WindFarmA    gaussian
+             voltage_3     0.014370          0.104059              0.105908 WindFarmA    gaussian
+
+Saved prediction results to: WindFarmA_gaussian_prediction_results.csv
+Saved feature sensitivity table to: WindFarmA_gaussian_feature_sensitivity.csv
+Loaded: WindFarmA_combined.csv
+Train shape: (916923, 13)
+Validation shape: (229231, 13)
+Test shape: (50593, 13)
+Positive rate in test set: 0.4198
+
+Accuracy: 0.8365
+ROC-AUC: 0.9297
+
+Confusion matrix:
+[[29355     0]
+ [ 8272 12966]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.7802    1.0000    0.8765     29355
+           1     1.0000    0.6105    0.7582     21238
+
+    accuracy                         0.8365     50593
+   macro avg     0.8901    0.8053    0.8173     50593
+weighted avg     0.8724    0.8365    0.8268     50593
+
+
+Top 10 most sensitive features:
+               feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+             power_avg     0.042921          1.000000              0.000000 WindFarmA     laplace
+       avg_rotor_speed     0.031655          0.626255              0.044963 WindFarmA     laplace
+       max_rotor_speed     0.030633          0.592374              0.049039 WindFarmA     laplace
+       min_rotor_speed     0.028416          0.518816              0.057888 WindFarmA     laplace
+avg_wind_abs_direction     0.028006          0.505212              0.059525 WindFarmA     laplace
+        avg_wind_speed     0.026118          0.442587              0.067059 WindFarmA     laplace
+        max_wind_speed     0.024776          0.398081              0.072413 WindFarmA     laplace
+avg_wind_rel_direction     0.019491          0.222760              0.093505 WindFarmA     laplace
+              avg_temp     0.018624          0.193993              0.096966 WindFarmA     laplace
+             voltage_3     0.016276          0.116111              0.106335 WindFarmA     laplace
+
+Saved prediction results to: WindFarmA_laplace_prediction_results.csv
+Saved feature sensitivity table to: WindFarmA_laplace_feature_sensitivity.csv
+Loaded: WindFarmA_combined.csv
+Train shape: (916923, 13)
+Validation shape: (229231, 13)
+Test shape: (50593, 13)
+Positive rate in test set: 0.4198
+
+Accuracy: 0.8377
+ROC-AUC: 0.9371
+
+Confusion matrix:
+[[29352     3]
+ [ 8209 13029]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.7814    0.9999    0.8773     29355
+           1     0.9998    0.6135    0.7604     21238
+
+    accuracy                         0.8377     50593
+   macro avg     0.8906    0.8067    0.8188     50593
+weighted avg     0.8731    0.8377    0.8282     50593
+
+
+Top 10 most sensitive features:
+        feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+      voltage_2     0.082366          1.000000              0.000000 WindFarmA     poisson
+      voltage_3     0.073454          0.881414              0.015644 WindFarmA     poisson
+      voltage_1     0.069143          0.824045              0.023212 WindFarmA     poisson
+       avg_temp     0.038749          0.419628              0.076564 WindFarmA     poisson
+max_rotor_speed     0.037043          0.396923              0.079559 WindFarmA     poisson
+ avg_wind_speed     0.035682          0.378807              0.081949 WindFarmA     poisson
+min_rotor_speed     0.031904          0.328539              0.088581 WindFarmA     poisson
+avg_rotor_speed     0.031611          0.324636              0.089095 WindFarmA     poisson
+      power_avg     0.027712          0.272755              0.095940 WindFarmA     poisson
+ max_wind_speed     0.026822          0.260917              0.097502 WindFarmA     poisson
+
+Saved prediction results to: WindFarmA_poisson_prediction_results.csv
+Saved feature sensitivity table to: WindFarmA_poisson_feature_sensitivity.csv
+Loaded: WindFarmB_combined.csv
+Train shape: (629549, 13)
+Validation shape: (157388, 13)
+Test shape: (72128, 13)
+Positive rate in test set: 0.0700
+
+Accuracy: 0.9210
+ROC-AUC: 0.9564
+
+Confusion matrix:
+[[62305  4774]
+ [  925  4124]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9854    0.9288    0.9563     67079
+           1     0.4635    0.8168    0.5914      5049
+
+    accuracy                         0.9210     72128
+   macro avg     0.7244    0.8728    0.7738     72128
+weighted avg     0.9488    0.9210    0.9307     72128
+
+
+Top 10 most sensitive features:
+        feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+      power_avg     0.060893          1.000000              0.000000 WindFarmB    gaussian
+avg_rotor_speed     0.030995          0.488076              0.048355 WindFarmB    gaussian
+      grid_freq     0.017855          0.263080              0.069608 WindFarmB    gaussian
+   grid_voltage     0.017245          0.252638              0.070594 WindFarmB    gaussian
+max_rotor_speed     0.013117          0.181946              0.077272 WindFarmB    gaussian
+ avg_wind_speed     0.006645          0.071129              0.087739 WindFarmB    gaussian
+ max_wind_speed     0.005466          0.050944              0.089646 WindFarmB    gaussian
+min_rotor_speed     0.004920          0.041602              0.090528 WindFarmB    gaussian
+       avg_temp     0.004667          0.037260              0.090938 WindFarmB    gaussian
+       max_temp     0.003720          0.021046              0.092470 WindFarmB    gaussian
+
+Saved prediction results to: WindFarmB_gaussian_prediction_results.csv
+Saved feature sensitivity table to: WindFarmB_gaussian_feature_sensitivity.csv
+Loaded: WindFarmB_combined.csv
+Train shape: (629549, 13)
+Validation shape: (157388, 13)
+Test shape: (72128, 13)
+Positive rate in test set: 0.0700
+
+Accuracy: 0.9207
+ROC-AUC: 0.9552
+
+Confusion matrix:
+[[62314  4765]
+ [  953  4096]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9849    0.9290    0.9561     67079
+           1     0.4623    0.8112    0.5889      5049
+
+    accuracy                         0.9207     72128
+   macro avg     0.7236    0.8701    0.7725     72128
+weighted avg     0.9483    0.9207    0.9304     72128
+
+
+Top 10 most sensitive features:
+        feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+      power_avg     0.060496          1.000000              0.000000 WindFarmB     laplace
+avg_rotor_speed     0.033324          0.529084              0.045090 WindFarmB     laplace
+   grid_voltage     0.018908          0.279242              0.069012 WindFarmB     laplace
+      grid_freq     0.018768          0.276824              0.069244 WindFarmB     laplace
+max_rotor_speed     0.014613          0.204809              0.076139 WindFarmB     laplace
+ avg_wind_speed     0.007854          0.087682              0.087354 WindFarmB     laplace
+ max_wind_speed     0.006252          0.059912              0.090013 WindFarmB     laplace
+min_rotor_speed     0.005539          0.047549              0.091197 WindFarmB     laplace
+       avg_temp     0.005173          0.041220              0.091803 WindFarmB     laplace
+       max_temp     0.004153          0.023541              0.093495 WindFarmB     laplace
+
+Saved prediction results to: WindFarmB_laplace_prediction_results.csv
+Saved feature sensitivity table to: WindFarmB_laplace_feature_sensitivity.csv
+Loaded: WindFarmB_combined.csv
+Train shape: (629549, 13)
+Validation shape: (157388, 13)
+Test shape: (72128, 13)
+Positive rate in test set: 0.0700
+
+Accuracy: 0.9193
+ROC-AUC: 0.9521
+
+Confusion matrix:
+[[62188  4891]
+ [  931  4118]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9853    0.9271    0.9553     67079
+           1     0.4571    0.8156    0.5859      5049
+
+    accuracy                         0.9193     72128
+   macro avg     0.7212    0.8713    0.7706     72128
+weighted avg     0.9483    0.9193    0.9294     72128
+
+
+Top 10 most sensitive features:
+        feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+      grid_freq     0.034832          1.000000              0.000000 WindFarmB     poisson
+avg_rotor_speed     0.027063          0.774302              0.024236 WindFarmB     poisson
+max_rotor_speed     0.015048          0.425247              0.061718 WindFarmB     poisson
+   grid_voltage     0.012504          0.351355              0.069653 WindFarmB     poisson
+ avg_wind_speed     0.008291          0.228959              0.082796 WindFarmB     poisson
+       avg_temp     0.007808          0.214906              0.084305 WindFarmB     poisson
+ max_wind_speed     0.006663          0.181657              0.087875 WindFarmB     poisson
+       max_temp     0.006545          0.178227              0.088244 WindFarmB     poisson
+ min_wind_speed     0.005852          0.158103              0.090405 WindFarmB     poisson
+min_rotor_speed     0.004604          0.121840              0.094299 WindFarmB     poisson
+
+Saved prediction results to: WindFarmB_poisson_prediction_results.csv
+Saved feature sensitivity table to: WindFarmB_poisson_feature_sensitivity.csv
+Loaded: WindFarmC_combined.csv
+Train shape: (2422886, 11)
+Validation shape: (605722, 11)
+Test shape: (158528, 11)
+Positive rate in test set: 0.1191
+
+Accuracy: 0.8766
+ROC-AUC: 0.9464
+
+Confusion matrix:
+[[122440  17207]
+ [  2351  16530]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9812    0.8768    0.9260    139647
+           1     0.4900    0.8755    0.6283     18881
+
+    accuracy                         0.8766    158528
+   macro avg     0.7356    0.8761    0.7772    158528
+weighted avg     0.9227    0.8766    0.8906    158528
+
+
+Top 10 most sensitive features:
+               feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+             power_avg     0.050417          1.000000              0.000000 WindFarmC    gaussian
+       avg_rotor_speed     0.029350          0.546629              0.054572 WindFarmC    gaussian
+       min_rotor_speed     0.026416          0.483481              0.062173 WindFarmC    gaussian
+       max_rotor_speed     0.013426          0.203942              0.095822 WindFarmC    gaussian
+        avg_wind_speed     0.012320          0.180126              0.098688 WindFarmC    gaussian
+              avg_temp     0.008096          0.089234              0.109629 WindFarmC    gaussian
+avg_wind_rel_direction     0.007189          0.069723              0.111977 WindFarmC    gaussian
+        max_wind_speed     0.006153          0.047415              0.114663 WindFarmC    gaussian
+              max_temp     0.005721          0.038124              0.115781 WindFarmC    gaussian
+              min_temp     0.005511          0.033607              0.116325 WindFarmC    gaussian
+
+Saved prediction results to: WindFarmC_gaussian_prediction_results.csv
+Saved feature sensitivity table to: WindFarmC_gaussian_feature_sensitivity.csv
+Loaded: WindFarmC_combined.csv
+Train shape: (2422886, 11)
+Validation shape: (605722, 11)
+Test shape: (158528, 11)
+Positive rate in test set: 0.1191
+
+Accuracy: 0.8742
+ROC-AUC: 0.9405
+
+Confusion matrix:
+[[122469  17178]
+ [  2762  16119]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9779    0.8770    0.9247    139647
+           1     0.4841    0.8537    0.6178     18881
+
+    accuracy                         0.8742    158528
+   macro avg     0.7310    0.8654    0.7713    158528
+weighted avg     0.9191    0.8742    0.8882    158528
+
+
+Top 10 most sensitive features:
+               feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+             power_avg     0.051272          1.000000              0.000000 WindFarmC     laplace
+       avg_rotor_speed     0.031577          0.577962              0.051412 WindFarmC     laplace
+       min_rotor_speed     0.027807          0.497180              0.061253 WindFarmC     laplace
+       max_rotor_speed     0.014360          0.209020              0.096356 WindFarmC     laplace
+        avg_wind_speed     0.014022          0.201773              0.097239 WindFarmC     laplace
+              avg_temp     0.009078          0.095837              0.110144 WindFarmC     laplace
+avg_wind_rel_direction     0.008264          0.078397              0.112268 WindFarmC     laplace
+        max_wind_speed     0.007271          0.057123              0.114860 WindFarmC     laplace
+              max_temp     0.006340          0.037159              0.117292 WindFarmC     laplace
+              min_temp     0.006313          0.036596              0.117360 WindFarmC     laplace
+
+Saved prediction results to: WindFarmC_laplace_prediction_results.csv
+Saved feature sensitivity table to: WindFarmC_laplace_feature_sensitivity.csv
+Loaded: WindFarmC_combined.csv
+Train shape: (2422886, 11)
+Validation shape: (605722, 11)
+Test shape: (158528, 11)
+Positive rate in test set: 0.1191
+
+Accuracy: 0.8831
+ROC-AUC: 0.9627
+
+Confusion matrix:
+[[122554  17093]
+ [  1432  17449]]
+
+Classification report:
+              precision    recall  f1-score   support
+
+           0     0.9885    0.8776    0.9297    139647
+           1     0.5052    0.9242    0.6532     18881
+
+    accuracy                         0.8831    158528
+   macro avg     0.7468    0.9009    0.7915    158528
+weighted avg     0.9309    0.8831    0.8968    158528
+
+
+Top 10 most sensitive features:
+        feature  sensitivity  sensitivity_norm  sampling_probability      farm noise_model
+avg_rotor_speed     0.024718          1.000000              0.000000 WindFarmC     poisson
+       avg_temp     0.016762          0.650454              0.054715 WindFarmC     poisson
+      power_avg     0.014658          0.558030              0.069182 WindFarmC     poisson
+       min_temp     0.012769          0.475018              0.082176 WindFarmC     poisson
+max_rotor_speed     0.012253          0.452377              0.085720 WindFarmC     poisson
+ avg_wind_speed     0.011733          0.429518              0.089298 WindFarmC     poisson
+min_rotor_speed     0.011566          0.422167              0.090449 WindFarmC     poisson
+       max_temp     0.011389          0.414406              0.091664 WindFarmC     poisson
+ max_wind_speed     0.005827          0.170044              0.129914 WindFarmC     poisson
+ min_wind_speed     0.002855          0.039489              0.150350 WindFarmC     poisson
+
+Saved prediction results to: WindFarmC_poisson_prediction_results.csv
+Saved feature sensitivity table to: WindFarmC_poisson_feature_sensitivity.csv

@@ -1,0 +1,69 @@
+---
+title: "feature_sensitivity"
+output: html_document
+---
+
+
+```{r}
+library(data.table)
+library(ggplot2)
+```
+
+
+```{r}
+make_feat_df <- function(file, farm_label) {
+  df <- fread(file)
+  names(df) <- make.unique(names(df))
+  df[, noise_model := tolower(as.character(noise_model))]
+  df <- df[noise_model == "gaussian"]
+
+  df <- df[, .(feature, sensitivity)]
+  df <- df[, .(sensitivity = mean(sensitivity, na.rm = TRUE)), by = feature]
+  df[, norm_sensitivity := sensitivity / max(sensitivity, na.rm = TRUE)]
+  df[, farm := farm_label]
+
+  df
+}
+
+df_A <- make_feat_df("WindFarmA_combined_feature_sensitivity.csv", "Wind Farm A")
+df_B <- make_feat_df("WindFarmB_combined_feature_sensitivity.csv", "Wind Farm B")
+df_C <- make_feat_df("WindFarmC_combined_feature_sensitivity.csv", "Wind Farm C")
+
+all_df <- rbindlist(list(df_A, df_B, df_C), fill = TRUE)
+
+top_features <- all_df[
+  , .(best_sensitivity = max(norm_sensitivity, na.rm = TRUE)),
+  by = feature
+][order(-best_sensitivity)]$feature[1:15]
+
+plot_df <- all_df[feature %in% top_features]
+
+feature_order <- plot_df[
+  , .(best_sensitivity = max(norm_sensitivity, na.rm = TRUE)),
+  by = feature
+][order(best_sensitivity)]$feature
+
+plot_df[, feature := factor(feature, levels = feature_order)]
+
+farm_colors <- c(
+  "Wind Farm A" = "#9ecae1",
+  "Wind Farm B" = "#b2abd2",
+  "Wind Farm C" = "#e6b899"
+)
+
+ggplot(plot_df, aes(x = norm_sensitivity, y = feature, color = farm)) +
+  geom_segment(aes(x = 0, xend = norm_sensitivity, yend = feature), linewidth = 1.2, alpha = 0.6) +
+  geom_point(size = 3) +
+  scale_color_manual(values = farm_colors) +
+  labs(
+    title = "Top Feature Sensitivities Across Wind Farms",
+    x = "Normalized Sensitivity",
+    y = "Feature",
+    color = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+```
